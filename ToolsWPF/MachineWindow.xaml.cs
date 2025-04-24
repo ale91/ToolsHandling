@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using ToolsWPF.ViewModel;
+using WebApiClient;
+
+namespace ToolsWPF
+{
+    /// <summary>
+    /// Logica di interazione per MachineWindow.xaml
+    /// </summary>
+    public partial class MachineWindow : Window
+    {
+        private readonly WebAPIClient _toolHttpClient;
+
+        //private readonly Services.Service _service;
+
+        public MachineWindow()
+        {
+            InitializeComponent();
+            DataContext = new MachineViewModel();
+        }
+
+    }
+}

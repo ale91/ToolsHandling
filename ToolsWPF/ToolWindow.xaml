@@ -1,0 +1,73 @@
+﻿<Window x:Class="ToolsWPF.ToolWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToolsWPF"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
+        mc:Ignorable="d"
+        Title="ToolsWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Sezione filtro-->
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="10">
+            <TextBox x:Name="SearchTextBox" Width="200" Margin="0,0,10,0" 
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Content="Cerca" Command="{Binding SearchToolCommand}" Margin="0,0,10,0" />
+            
+            <!--Aggiunta tasto modifica-->
+            <Button Content="Modifica" Command="{Binding EditToolCommand}" IsEnabled="{Binding CanEditTool}" Margin="0,0,10,0" />
+            
+            <!--Aggiunta tasto elimina-->
+            <Button Content="Elimina" Command="{Binding DeleteToolCommand}" IsEnabled="{Binding CanDeleteTool}" />
+
+        </StackPanel>
+
+
+        <!--DataGrid per i Tools-->
+        <DataGrid x:Name="ToolsDataGrid" IsReadOnly="True" Grid.Row="1" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Tools, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  
+                  SelectedItem="{Binding Tool}" CanUserAddRows="False" VerticalAlignment="Stretch" 
+                  HorizontalAlignment="Stretch" HeadersVisibility="Column">
+            
+            <!--Modifica colore riga selezionata-->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="Green" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+
+            <!--Input Binding per doppio Click-->
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick"
+                              Command="{Binding MouseDoubleClick}"/>
+            </DataGrid.InputBindings>
+
+            <!-- Imposta il background delle celle trasparente -->
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+            </DataGrid.CellStyle>
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="IdTool" Binding="{Binding IdTool}" Width="*"/>
+                <DataGridTextColumn Header="BoschCode" Binding="{Binding BoschCode}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="*"/>
+                <DataGridTextColumn Header="TurretCode" Binding="{Binding TurretCode}" Width="*"/>
+                <DataGridTextColumn Header="ToolType" Binding="{Binding ToolType}" Width="*"/>
+                <DataGridTextColumn Header="Machine" Binding="{Binding Machine}" Width="*" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
