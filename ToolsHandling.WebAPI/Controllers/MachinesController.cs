@@ -1,4 +1,5 @@
-﻿using DAO;
+﻿using Autofac.Core;
+using DAO;
 using Domain;
 using Services;
 using System;
@@ -14,49 +15,56 @@ namespace ToolsHandling.WebAPI.Controllers
 {
     public class MachinesController : ApiController
     {
+
+        private readonly IService _service;
+
+        //Costruttore con DI (Dipendency Injection)
+        public MachinesController(IService service)
+        {
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+        }
+
         // GET: GetAllMachines
         [System.Web.Http.Route("api/Machines/GetAllMachines")]
         [System.Web.Http.HttpGet]
-        public List<Machines> GetAllMachines()
-        {
-            var service = new Services.Service();
-            return service.GetAllMachines();
+        public IHttpActionResult GetAllMachines()
+        {            
+            return Ok(_service.GetAllMachines());
         }
 
         // GET: Machines/{id}
-        public Machines GetMachineById(int id)
+        public IHttpActionResult GetMachineById(int id)
         {
-            var service = new Services.Service();
-            return service.GetMachineById(id);
+            return Ok(_service.GetMachineById(id));
         }
 
         // POST: InsertMachines
-        public void InsertMachine(Machines machine)
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult InsertMachine(Machines machine)
         {
-            var service = new Services.Service();
-            service.InsertMachine(machine);
+            _service.InsertMachine(machine);
+            return Ok();
         }
 
         // PUT: UpdateMachines
-        public void UpdateMachine(Machines machine)
+        public IHttpActionResult UpdateMachine(Machines machine)
         {
-            var service = new Services.Service();
-            service.UpdateMachine(machine);
+            _service.UpdateMachine(machine);
+            return Ok();
         }
 
         // DELETE: DeleteMachines/{machineCode}
-        public void DeleteMachine(string machineCode)
+        public IHttpActionResult DeleteMachine(string machineCode)
         {
-            var service = new Services.Service();
-            service.DeleteMachine(machineCode);
+            _service.DeleteMachine(machineCode);
+            return Ok();
         }
 
         // PUT: UpdateAllMachinesTypes
         [System.Web.Http.Route("api/Machines/UpdateAllMachinesTypes")]
         public IHttpActionResult UpdateAllMachinesType()
-        {
-            var service = new Services.Service();
-            return Ok(service.UpdateAllMachinesType());
+        {            
+            return Ok(_service.UpdateAllMachinesType());
         }
 
         //GET: Tools By Machine
@@ -64,8 +72,7 @@ namespace ToolsHandling.WebAPI.Controllers
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetToolsByMachine(string machineCode)
         {
-            var service = new Services.Service();
-            return Ok(service.GetToolsByMachine(machineCode));
+            return Ok(_service.GetToolsByMachine(machineCode));
         }
 
         //endpoint legge le macchine e fa l'update delle macchine
