@@ -29,8 +29,7 @@ namespace WebApiClient
         public Machines GetMachineById(int id)
         {
             Machines machine = null;
-
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
+            
             HttpResponseMessage response = _httpClient.GetAsync($"{Controller.Machines}/GetMachineById/{id}").Result;
 
             if (response.IsSuccessStatusCode)
@@ -46,7 +45,6 @@ namespace WebApiClient
         {
             bool isUpdated = false;
 
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
             var jsonContent = JsonConvert.SerializeObject(machine);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
@@ -64,7 +62,6 @@ namespace WebApiClient
         {
             bool isDeleted = false;
 
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
             HttpResponseMessage response = _httpClient.DeleteAsync($"{Controller.Machines}/DeleteMachine/{machineCode}").Result;
 
             if (response.IsSuccessStatusCode)
@@ -79,7 +76,6 @@ namespace WebApiClient
         {
             bool isDeleted = false;
 
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
             var jsonContent = JsonConvert.SerializeObject(machine);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
@@ -97,7 +93,6 @@ namespace WebApiClient
         {
             bool isInserted = false;
 
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
 
             //Aggiungi il ToolType all'oggetto Machines
             machine.ToolType = ToolType;
@@ -122,8 +117,7 @@ namespace WebApiClient
             bool isUpdated = false;
 
             using (HttpClient client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("https://localhost:44344/");
+            {                
                 HttpResponseMessage response = client.PutAsync($"{Controller.Machines}/UpdateAllMachinesTypes", null).Result;
 
                 if (response.IsSuccessStatusCode)

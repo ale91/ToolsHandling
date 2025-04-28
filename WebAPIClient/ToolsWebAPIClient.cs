@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -10,12 +11,14 @@ using System.Threading.Tasks;
 namespace WebApiClient
 {
     public partial class WebAPIClient
-    {
+    {      
         public List<Tools> GetAllTools()
         {
             List<Tools> tools = new List<Tools>();
 
-            HttpResponseMessage response = _httpClient.GetAsync($"{Controller.Tools}/GetAllTools").Result;
+            HttpResponseMessage response = _httpClient.GetAsync("api/Tools/GetAllTools").Result;
+
+            //HttpResponseMessage response = _httpClient.GetAsync($"{Controller.Tools}/GetAllTools").Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -30,7 +33,7 @@ namespace WebApiClient
         {
             Tools tool = null;
 
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
+            //_httpClient.BaseAddress = new Uri("https://localhost:44344/");
             HttpResponseMessage response = _httpClient.GetAsync($"{Controller.Tools}/GetToolsById/{idTool}").Result;
 
             if (response.IsSuccessStatusCode)
@@ -44,7 +47,7 @@ namespace WebApiClient
 
         public void InsertTools(Tools tool)
         {
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
+            //_httpClient.BaseAddress = new Uri("https://localhost:44344/");
             var jsonContent = JsonConvert.SerializeObject(tool);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
@@ -99,7 +102,7 @@ namespace WebApiClient
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44344/");
+                //client.BaseAddress = new Uri("https://localhost:44344/");
                 HttpResponseMessage response = client.PutAsync($"{Controller.Tools}/UpdateAllToolsType", null).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -117,7 +120,7 @@ namespace WebApiClient
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44344/");
+                //client.BaseAddress = new Uri("https://localhost:44344/");
                 HttpResponseMessage response = client.PutAsync($"{Controller.Tools}/UpdateAllToolTypes", null).Result;
 
                 if (response.IsSuccessStatusCode)
@@ -135,7 +138,7 @@ namespace WebApiClient
 
             using (HttpClient client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44344/");
+                //client.BaseAddress = new Uri("https://localhost:44344/");
                 HttpResponseMessage response = client.GetAsync($"{Controller.Tools}/GetToolsByToolType?toolType={toolType}&isMounted={isMounted}").Result;
 
                 if (response.IsSuccessStatusCode)
@@ -152,7 +155,7 @@ namespace WebApiClient
         {
             List<Tools> tools = new List<Tools>();
 
-            _httpClient.BaseAddress = new Uri("https://localhost:44344/");
+            //_httpClient.BaseAddress = new Uri("https://localhost:44344/");
             HttpResponseMessage response = _httpClient.GetAsync($"{Controller.Tools}/GetToolsByMachine/{machineCode}").Result;
 
             if (response.IsSuccessStatusCode)
