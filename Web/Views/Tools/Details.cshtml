@@ -1,0 +1,42 @@
+﻿@model Domain.Tools
+
+@{
+    ViewBag.Title = "Details";
+    var context = ViewBag.Context as string;
+}
+
+<h2>@ViewBag.SectionTitle</h2>
+
+<div>
+    <h4>Tool</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">IdTool</dt>
+        <dd class="col-sm-10">
+            @Html.TextBoxFor(m => m.IdTool, new { @class = "form-control" })
+        </dd>
+
+        <dt class="col-sm-2">BoschCode</dt>
+        <dd class="col-sm-10">
+            @Html.TextBoxFor(m => m.BoschCode, new { @class = "form-control" })
+        </dd>
+
+        <dt class="col-sm-2">Description</dt>
+        <dd class="col-sm-10">
+            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+        </dd>
+    </dl>
+</div>
+
+<div>
+    @if (ViewBag.ShowButton == true)
+    {
+        <a href="@Url.Action(@ViewBag.ButtonAction, "Tools", new { id = Model.IdTool })" class="btn btn-success">@ViewBag.ButtonDescription</a>
+    }
+
+
+    <a href="@Url.Action("Index", "Tools")" class="btn btn-secondary">Back</a>
+
+</div>
+
+

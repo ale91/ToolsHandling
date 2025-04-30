@@ -1,0 +1,26 @@
+﻿@model Domain.Tools
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "Tools", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>IdTool</label>
+        @Html.TextBoxFor(m => m.IdTool, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group">
+        <label>BoschCode</label>
+        @Html.TextBoxFor(m => m.BoschCode, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="@Url.Action("Index", "Tools")" class="btn btn-secondary">Cancel</a>
+}
+

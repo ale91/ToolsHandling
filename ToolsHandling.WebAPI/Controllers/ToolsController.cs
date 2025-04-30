@@ -31,6 +31,7 @@ namespace ToolsHandling.WebAPI.Controllers
         //Service service = new Service();
 
         //GET: ToolsAllTools
+        [System.Web.Http.Route("api/Tools/GetAllTools")]
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetAllTools()
         {
@@ -61,6 +62,7 @@ namespace ToolsHandling.WebAPI.Controllers
         }
 
         //GET: Tools/{idTool}
+        [System.Web.Http.Route("api/Tools/GetToolsById/{idTool}")]
         [System.Web.Http.HttpGet]
         public IHttpActionResult GetToolsById(string idTool)
         {
@@ -69,7 +71,7 @@ namespace ToolsHandling.WebAPI.Controllers
 
         //POST: InsertTools
         [System.Web.Http.HttpPost]
-        public IHttpActionResult InsertTools(Tools tool)
+        public IHttpActionResult InsertTools([FromBody] Tools tool)
         {
             _service.InsertTools(tool);
             return Ok();
@@ -78,15 +80,16 @@ namespace ToolsHandling.WebAPI.Controllers
         //POST: UpdateTools
         [System.Web.Http.Route("api/Tools/UpdateTools")]
         [System.Web.Http.HttpPost]
-        public IHttpActionResult UpdateTools(Tools tool)
+        public IHttpActionResult UpdateTools([FromBody] Tools tool)
         {
             _service.UpdateTools(tool);
             return Ok();
         }
 
         //DELETE: DeleteTools
+        [System.Web.Http.Route("api/Tools/DeleteTools")]
         [System.Web.Http.HttpPost]
-        public IHttpActionResult DeleteTools(string idTool)
+        public IHttpActionResult DeleteTools([FromBody]string idTool)
         {
             _service.DeleteTools(idTool);
             return Ok();

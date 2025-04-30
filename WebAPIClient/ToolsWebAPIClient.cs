@@ -86,7 +86,7 @@ namespace WebApiClient
             var jsonContent = JsonConvert.SerializeObject(idTool);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = _httpClient.PostAsync($"{Controller.Tools}/DeleteTool", content).Result;
+            HttpResponseMessage response = _httpClient.PostAsync($"{Controller.Tools}/DeleteTools", content).Result;
 
             if (response.IsSuccessStatusCode)
             {
