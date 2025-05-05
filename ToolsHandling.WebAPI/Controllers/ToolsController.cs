@@ -89,7 +89,7 @@ namespace ToolsHandling.WebAPI.Controllers
         //DELETE: DeleteTools
         [System.Web.Http.Route("api/Tools/DeleteTools")]
         [System.Web.Http.HttpPost]
-        public IHttpActionResult DeleteTools([FromBody]string idTool)
+        public IHttpActionResult DeleteTools([FromBody] string idTool)
         {
             _service.DeleteTools(idTool);
             return Ok();
