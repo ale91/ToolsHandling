@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MachinesController.cs" />
     <Compile Include="Controllers\MachineToolController.cs" />
+    <Compile Include="Controllers\PartNumbersController.cs" />
     <Compile Include="Controllers\ToolsController.cs" />
     <Compile Include="Controllers\TurretsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -281,6 +282,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\PartNumbers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\bootstrap.min.js.map" />

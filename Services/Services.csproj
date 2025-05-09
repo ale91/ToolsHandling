@@ -112,10 +112,12 @@
   <ItemGroup>
     <Compile Include="IMachineService.cs" />
     <Compile Include="IMachineToolService.cs" />
+    <Compile Include="IPartNumberService.cs" />
     <Compile Include="IToolService.cs" />
     <Compile Include="ITurretService.cs" />
     <Compile Include="MachineService.cs" />
     <Compile Include="MachineToolService.cs" />
+    <Compile Include="PartNumberService.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ToolService.cs" />

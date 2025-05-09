@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace WebApiClient
 {
     public partial class WebAPIClient
-    {      
+    {
         public List<Tools> GetAllTools()
         {
             List<Tools> tools = new List<Tools>();
@@ -45,18 +45,25 @@ namespace WebApiClient
             return tool;
         }
 
-        public void InsertTools(Tools tool)
+        public Tools InsertTools(Tools tool)
         {
             //_httpClient.BaseAddress = new Uri("https://localhost:44344/");
             var jsonContent = JsonConvert.SerializeObject(tool);
             var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = _httpClient.PostAsync($"{Controller.Tools}/InsertTool", content).Result;
+            HttpResponseMessage response = _httpClient.PostAsync($"{Controller.Tools}/InsertTools", content).Result;
+
+            var resultContent = response.Content.ReadAsStringAsync();
 
             if (response.IsSuccessStatusCode)
             {
-                var resultContent = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject<Tools>(resultContent.Result); //Restituisce il tool deserializzato
             }
+            else
+            {
+                throw new Exception(resultContent.Result);
+            }
+            return null;
         }
 
         public bool UpdateTools(Tools tool)
@@ -73,8 +80,6 @@ namespace WebApiClient
             {
                 isUpdated = true;
             }
-
-
 
             return isUpdated;
         }
@@ -165,6 +170,21 @@ namespace WebApiClient
             }
 
             return tools;
+        }
+
+        public List<Turrets> GetAllTurrets()
+        {
+            List<Turrets> turrets = new List<Turrets>();
+
+            HttpResponseMessage response = _httpClient.GetAsync("api/Turrets/GetAllTurrets").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                turrets = JsonConvert.DeserializeObject<List<Turrets>>(content);
+            }
+
+            return turrets;
         }
 
     }

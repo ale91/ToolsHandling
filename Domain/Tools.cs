@@ -30,6 +30,7 @@ namespace Domain
 
         public virtual string Machine { get; set; }
 
-       // public virtual Machines MachineTools { get; set; }
+        // public virtual Machines MachineTools { get; set; }
+        
     }
 }

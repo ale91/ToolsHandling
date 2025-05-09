@@ -70,11 +70,20 @@ namespace ToolsHandling.WebAPI.Controllers
         }
 
         //POST: InsertTools
+        [System.Web.Http.Route("api/Tools/InsertTools")]
         [System.Web.Http.HttpPost]
         public IHttpActionResult InsertTools([FromBody] Tools tool)
         {
-            _service.InsertTools(tool);
-            return Ok();
+            try
+            {
+                _service.InsertTools(tool);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Inserimento senza successo");
+            }           
+            
         }
 
         //POST: UpdateTools
@@ -93,8 +102,6 @@ namespace ToolsHandling.WebAPI.Controllers
         {
             _service.DeleteTools(idTool);
             return Ok();
-        }
-
-        
+        }        
     }
 }

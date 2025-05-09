@@ -23,6 +23,10 @@ namespace DAO
         //Aggiunta di Tools
         public DbSet<Tools> Tools { get; set; }
 
+        //Aggiunta di PartNumbers
+        public DbSet<PartNumbers> PartNumbers { get; set; }
+
+
         public MyDBContext() : base("name=ToolsConnectionString") //collegamento database prende stringa connessione nell'app.config
         {
             Database.Log = sql => Debug.Write(sql); //configura il contesto del database (MyDBContext) per registrare tutte le query SQL generate da Entity Framework. In particolare, utilizza il metodo Debug.Write per scrivere queste query nella finestra di output del debugger
@@ -63,6 +67,12 @@ namespace DAO
                 .WithOptional(t => t.MachineTools)
                 .HasForeignKey(t => t.Machine);
             */
+
+            //Mappatura di PartNumbers            
+            modelBuilder.Entity<PartNumbers>().ToTable("PartNumbers");
+
+            //Configurazione della chiave primaria
+            modelBuilder.Entity<PartNumbers>().HasKey(p => p.Code);           
 
             base.OnModelCreating(modelBuilder);
 

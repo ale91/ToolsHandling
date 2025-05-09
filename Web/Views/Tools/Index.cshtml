@@ -7,11 +7,12 @@
 <h2>Tools</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "ShowCreate", null, new { @class = "btn btn-success"})
 </p>
 <table class="table table-striped table-bordered" style="border-radius: 5px; overflow: hidden; border-collapse: separate; border-spacing: 0; border: 1px solid #ddd;">
     <thead style="background-color: #f8f9fa; border-radius: 10px 10px 0 0; overflow: hidden;">
         <tr>
+            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().IdTool)</th>
             <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().BoschCode)</th>
             <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Description)</th>
             <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().PrimarySupplier)</th>

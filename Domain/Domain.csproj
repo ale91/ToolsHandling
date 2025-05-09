@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Machines.cs" />
     <Compile Include="MachineTools.cs" />
+    <Compile Include="PartNumbers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools.cs" />
     <Compile Include="Turrets.cs" />

@@ -123,6 +123,7 @@
     <Compile Include="Repository.Machines.cs" />
     <Compile Include="DataContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository.PartNumbers.cs" />
     <Compile Include="Repository.Turrets.cs" />
   </ItemGroup>
   <ItemGroup>

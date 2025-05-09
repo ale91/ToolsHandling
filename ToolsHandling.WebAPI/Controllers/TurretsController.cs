@@ -12,7 +12,13 @@ namespace ToolsHandling.WebAPI.Controllers
 {
     public class TurretsController : ApiController
     {
+        private readonly IService _service;
+
         // GET: Turrets
+
+        //GET: ToolsAllTurrets
+        [System.Web.Http.Route("api/Turrets/GetAllTurrets")]
+        [System.Web.Http.HttpGet]
         public List<Turrets> GetAllTurrets()
         {
             var service = new Service();
@@ -20,6 +26,9 @@ namespace ToolsHandling.WebAPI.Controllers
         }
 
         // GET: Turrets/{id}
+
+        [System.Web.Http.Route("api/Turrets/GetTurretsById/{id}")]
+        [System.Web.Http.HttpGet]
         public Turrets GetTurretsById(int id)
         {
             var service = new Service();
