@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using System.Data.Entity;
 
 namespace DAO
 {
@@ -15,7 +16,7 @@ namespace DAO
 			using (MyDBContext myDb = new MyDBContext())
 			{
 
-				return myDb.Tools.ToList();
+				return myDb.Tools.Include(t => t.Turret).ToList();
 
 			}
 		}
@@ -25,7 +26,7 @@ namespace DAO
 		{
 			using (MyDBContext myDb = new MyDBContext())
 			{
-				return myDb.Tools.Find(idTool);
+				return myDb.Tools.Include(t => t.Turret).Where(x=>x.IdTool.Equals(idTool)).FirstOrDefault();
 			}
 		}
 
@@ -122,6 +123,6 @@ namespace DAO
             }
         }
 
-
+		
     }
 }

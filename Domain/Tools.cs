@@ -31,6 +31,9 @@ namespace Domain
         public virtual string Machine { get; set; }
 
         // public virtual Machines MachineTools { get; set; }
+
+        //Proprietà verso Turrets
+        public virtual Turrets Turret { get; set; }
         
     }
 }

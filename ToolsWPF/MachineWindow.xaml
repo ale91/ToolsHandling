@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MachineWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid ItemsSource="{Binding Machines}" AutoGenerateColumns="False" 
+        <DataGrid ItemsSource="{Binding Machines}" AutoGenerateColumns="False" IsReadOnly="True"
               HeadersVisibility="Column" CanUserAddRows="False"
               SelectedItem="{Binding Machine}">
 

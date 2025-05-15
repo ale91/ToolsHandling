@@ -76,6 +76,11 @@ namespace DAO
 
             base.OnModelCreating(modelBuilder);
 
+            //Relazione tra Tools e Turrets tramite TurretCode
+            modelBuilder.Entity<Tools>()
+                .HasOptional(t => t.Turret)
+                .WithMany()
+                .HasForeignKey(t => t.TurretCode);
         }
     }
 

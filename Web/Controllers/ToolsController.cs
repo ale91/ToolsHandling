@@ -95,7 +95,7 @@ namespace Web.Controllers
             ViewBag.ShowButton = true;
             ViewBag.ButtonAction = "Delete"; // Azione per eliminare l'elemento
             ViewBag.ButtonDescription = "Delete";
-            
+
             return View("Details", tool);
         }
 
@@ -188,5 +188,52 @@ namespace Web.Controllers
 
             return View("Details", newTool);
         }
+
+        public ActionResult DetailsPartial(string id)
+        {
+            var tool = _apiClient.GetToolsById(id);
+            var turrets = _apiClient.GetAllTurrets();
+            ViewBag.Turrets = new SelectList(turrets, "TurretCode", "Description");
+
+            ViewBag.SectionTitle = "Details";
+            ViewBag.IsEditable = false;
+            ViewBag.ShowButton = false;
+            ViewBag.ButtonAction = "";
+            ViewBag.ButtonDescription = "";
+
+            return PartialView("Details", tool);
+        }
+
+
+        public ActionResult CreatePartial()
+        {
+            var newTool = new Tools(); // Crea un oggetto vuoto
+            bool idExist = true;
+
+            while (idExist)
+            {
+                //Genera un IdTool casuale di 4 cifre
+                newTool.IdTool = new Random().Next(1000, 10000).ToString();
+                //Verifica se l'ID già esiste
+                idExist = _apiClient.GetToolsById(newTool.IdTool) != null;
+            }
+
+            //Recupera l'elenco dei turret
+            var turrets = _apiClient.GetAllTurrets();
+            ViewBag.Turrets = new SelectList(turrets, "TurretCode", "Description");
+
+            ViewBag.IsEditable = true;
+            ViewBag.SectionTitle = "Create";
+            ViewBag.ShowButton = true;
+            ViewBag.ButtonAction = "Create";
+            ViewBag.ButtonDescription = "Create";
+
+            //Restituisci la view Details senza layout se richiesta AJAX
+            if (Request.IsAjaxRequest())
+                return PartialView("Details", newTool);
+            else
+                return View("Details", newTool);
+        }
+
     }
 }

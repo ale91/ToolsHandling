@@ -2,53 +2,173 @@
 
 @{
     ViewBag.Title = "Tools";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Tools</h2>
 
-<p>
-    @Html.ActionLink("Create New", "ShowCreate", null, new { @class = "btn btn-success"})
-</p>
-<table class="table table-striped table-bordered" style="border-radius: 5px; overflow: hidden; border-collapse: separate; border-spacing: 0; border: 1px solid #ddd;">
-    <thead style="background-color: #f8f9fa; border-radius: 10px 10px 0 0; overflow: hidden;">
-        <tr>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().IdTool)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().BoschCode)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Description)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().PrimarySupplier)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().SecondarySupplier)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().PrimarySharpener)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().SecondarySharpener)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Quantity)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().TurretCode)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().ToolType)</th>
-            <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Machine)</th>
-            <th style="border: 1px solid #ddd;">Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.IdTool)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.BoschCode)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Description)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.PrimarySupplier)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.SecondarySupplier)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.PrimarySharpener)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.SecondarySharpener)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Quantity)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.TurretCode)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.ToolType)</td>
-                <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Machine)</td>
-                <td style="border: 1px solid #ddd;">
-                    <div class="d-flex flex-column">
-                        <a href="@Url.Action("ShowEdit", "Tools", new { id = item.IdTool })" class="btn btn-success btn-sm mb-2">Edit</a>
-                        <a href="@Url.Action("Details", "Tools", new { id = item.IdTool })" class="btn btn-success btn-sm mb-2">Details</a>
-                        <a href="@Url.Action("ShowDelete", "Tools", new { id = item.IdTool })" class="btn btn-success btn-sm">Delete</a>
-                    </div>
-                </td>
-            </tr>
+
+
+@*<p>
+        @Html.ActionLink("Create New", "ShowCreate", null, new { @class = "btn btn-success" })
+    </p>*@
+
+<!-- Contenitore flessibile per tabella e banner -->
+<div style="display: flex; align-items: flex-start;">
+    <!-- Tabella con larghezza flessibile -->
+    @*<div class="col-9" id="tableContainer" style="flex: 1 1 0%; transition: flex-basis 0.3s;">*@
+    <div class="col-9" id="tableContainer">
+        <table id="toolsTable" class="table table-striped table-bordered" style="border-radius: 5px; overflow: hidden; border-collapse: separate; border-spacing: 0; border: 1px solid #ddd;">
+            <thead style="background-color: #f8f9fa; border-radius: 10px 10px 0 0; overflow: hidden;">
+                <tr>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().IdTool)</th>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().BoschCode)</th>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Description)</th>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Quantity)</th>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().TurretCode)</th>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().ToolType)</th>
+                    <th style="border: 1px solid #ddd;">@Html.DisplayNameFor(model => model.First().Machine)</th>
+                    <th style="border: 1px solid #ddd;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="tool-row" data-id="@item.IdTool">
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.IdTool)</td>
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.BoschCode)</td>
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Description)</td>
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Quantity)</td>
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.TurretCode)</td>
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.ToolType)</td>
+                        <td style="border: 1px solid #ddd;">@Html.DisplayFor(modelItem => item.Machine)</td>
+                        <td style="border: 1px solid #ddd;">
+                            <div class="d-flex flex-column">
+                                <a href="@Url.Action("ShowEdit", "Tools", new { id = item.IdTool })" class="btn btn-success btn-sm mb-2">Edit</a>
+                                <a href="@Url.Action("Details", "Tools", new { id = item.IdTool })" class="btn btn-success btn-sm mb-2">Details</a>
+                                <a href="@Url.Action("ShowDelete", "Tools", new { id = item.IdTool })" class="btn btn-success btn-sm">Delete</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Banner a destra, inizialmente nascosto -->
+    @*<div id="bannerCol" style="width: 400px; min-width: 220px; margin-left: 20px; display: none;">*@
+    <div class="col-3" id="bannerCol" style="display: none; margin-left: 32px">
+        <div id="detailsContainer"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const rows = document.querySelectorAll(".tool-row");
+        const bannerCol = document.getElementById("bannerCol");
+
+
+        //Mostra la partial di creazione tool all'avvio
+        bannerCol.style.display = "block";
+
+        getCreatePartial();
+
+        rows.forEach(row => {
+            row.addEventListener("click", function () {
+                const toolId = this.getAttribute("data-id");
+
+                bannerCol.style.display = "block";
+
+                //getDetailsByUrlAction(toolId);
+
+                getDetailsByAjax(toolId);
+            });
+        });
+    });
+
+    //Click fuori dalla tabella
+    document.addEventListener("click", function (event) {
+        //Se il click non è dentro la tabella
+        if (!tableContainer.contains(event.target) &&
+            !bannerCol.contains(event.target)
+        ){
+
+            getCreatePartial();
         }
-    </tbody>
-</table>
+    });
+
+    function getDetailsByUrlAction(toolId) {
+
+        const detailsContainer = document.getElementById("detailsContainer");
+
+        fetch('@Url.Action("DetailsPartial", "Tools")' + '?id=' + toolId, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+            .then(response => response.text())
+            .then(html => {
+                detailsContainer.innerHTML = html;
+            });
+    }
+
+        function getDetailsByAjax(toolId) {
+            var detailsContainer = document.getElementById("detailsContainer");
+            $.ajax({
+                url: '@Url.Action("DetailsPartial", "Tools")',
+                type: 'GET',
+                data: { id: toolId },
+                headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                success: function (html) {
+                    detailsContainer.innerHTML = html;                    
+                }
+            })
+        }
+
+    function getCreatePartial() {
+        const detailsContainer = document.getElementById("detailsContainer");
+        fetch('@Url.Action("CreatePartial", "Tools")', {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+            .then(response => response.text())
+            .then(html => {
+                detailsContainer.innerHTML = html;
+            });
+    }
+
+    //Datatables
+        $(document).ready(function () {
+            var table = $('#toolsTable').DataTable({
+                dom: '<"top"fB>rt<"bottom"l><"clear">', // Search a sinistra, pulsanti a destra
+                buttons: [ 
+                    {
+                        text: 'Create New',
+                        className: 'btn btn-success',
+                        action: function () {
+                            document.getElementById("bannerCol").style.display = "block";
+                            getCreatePartial();
+                        }
+                    },
+                    {
+                        extend: 'excelHtml5',
+                        text: 'Export Excel',
+                        className: 'btn btn-success',
+                        exportOptions: {
+                            columns: ':not(:last-child)'
+                        }
+                    }
+                ]
+            });
+
+            ////Forza i pulsanti a destra e la search a sinistra
+            //document.querySelector('.dataTables_wrapper .dt-buttons').style.float = 'right';
+            //document.querySelector('.dataTables_wrapper .dataTables_filter').style.float = 'left';
+
+        });
+
+    //$(document).ready(function () {
+    //    console.log("Hello World!");
+    //});
+
+    </script>
+}

@@ -5,7 +5,7 @@
     var context = ViewBag.Context as string;
 }
 
-<h2>@ViewBag.SectionTitle</h2>
+@*<h2>@ViewBag.SectionTitle</h2>*@
 
 @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
 {
@@ -15,69 +15,69 @@
 }
 
 
-<h4>Tool</h4>
-<hr />
-@using (Html.BeginForm((string)@ViewBag.ButtonAction, "Tools", FormMethod.Post))
-{
-    <div>
-
-        <dl class="row">
-            <dt class="col-sm-2">IdTool</dt>
-            <dd class="col-sm-10">
-                @Html.TextBoxFor(m => m.IdTool, new { @class = "form-control", @readonly = !(ViewBag.IsEditable ?? false) ? "readonly" : null })
-            </dd>
-
-            <dt class="col-sm-2">BoschCode</dt>
-            <dd class="col-sm-10">
-                @if (ViewBag.IsEditable ?? false)
-                {
-                    @Html.TextBoxFor(m => m.BoschCode, new { @class = "form-control" })
-                }
-                else
-                {
-                    @Html.TextBoxFor(m => m.BoschCode, new { @class = "form-control", @readonly = "readonly" })
-                }
-            </dd>
-
-            <dt class="col-sm-2">Description</dt>
-            <dd class="col-sm-10">
-                @if (ViewBag.IsEditable ?? false)
-                {
-                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                }
-                else
-                {
-                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @readonly = "readonly" })
-                }                
-            </dd>
-
-            <dt class="col-sm-2">Turret</dt>
-            <dd class="col-sm-10">
-                @if (ViewBag.IsEditable ?? false)
-                {
-                    @Html.DropDownListFor(m => m.TurretCode, (SelectList)ViewBag.Turrets, "-- Seleziona un Turret --", new { @class = "form-control" })
-                }
-                else
-                {
-                    @Html.DisplayFor(m => m.TurretCode)
-                }
-            </dd>
-        </dl>
-
-
-    </div>
-
-    <div>
-        @if (ViewBag.ShowButton == true)
+<div class="card shadow-sm border rounded" style="background: #f8f9fa;">
+    <div class="card-body">
+        <h2 class="card-title mb-3">@ViewBag.SectionTitle</h2>
+        <h4 class="mb-3">Tool</h4>
+        <hr />
+        @using (Html.BeginForm((string)@ViewBag.ButtonAction, "Tools", FormMethod.Post))
         {
+            <div>
+                <dl class="row">
+                    <dt class="col-sm-3 fw-bold">IdTool</dt>
+                    <dd class="col-sm-9">
+                        @Html.TextBoxFor(m => m.IdTool, new { @class = "form-control", @readonly = !(ViewBag.IsEditable ?? false) ? "readonly" : null })
+                    </dd>
 
-            <button type="submit" class="btn btn-success">@ViewBag.ButtonDescription</button>
+                    <dt class="col-sm-3 fw-bold">BoschCode</dt>
+                    <dd class="col-sm-9">
+                        @if (ViewBag.IsEditable ?? false)
+                        {
+                            @Html.TextBoxFor(m => m.BoschCode, new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.BoschCode, new { @class = "form-control", @readonly = "readonly" })
+                        }
+                    </dd>
 
-            @*<a href="@Url.Action(@ViewBag.ButtonAction, "Tools", tools)" class="btn btn-success">@ViewBag.ButtonDescription</a>*@
+                    <dt class="col-sm-3 fw-bold">Description</dt>
+                    <dd class="col-sm-9">
+                        @if (ViewBag.IsEditable ?? false)
+                        {
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control", @readonly = "readonly" })
+                        }
+                    </dd>
+
+                    <dt class="col-sm-3 fw-bold">Turret</dt>
+                    <dd class="col-sm-9">
+                        @if (ViewBag.IsEditable ?? false)
+                        {
+                            @Html.DropDownListFor(m => m.TurretCode, (SelectList)ViewBag.Turrets, "-- Seleziona un Turret --", new { @class = "form-control" })
+                        }
+                        else
+                        {
+                            @Html.TextBoxFor(m => m.Turret.Description, new { @class = "form-control", @readonly = "readonly" })
+                        }
+                    </dd>
+                </dl>
+            </div>
+            <div class="mt-3">
+                @if (ViewBag.ShowButton == true)
+                {
+                    <button type="submit" class="btn btn-success me-2">@ViewBag.ButtonDescription</button>
+
+                    @*<a href="@Url.Action(@ViewBag.ButtonAction, "Tools", tools)" class="btn btn-success">@ViewBag.ButtonDescription</a>*@
+                }
+
+
+                <a href="@Url.Action("Index", "Tools")" class="btn btn-secondary">Back</a>
+
+            </div>
         }
-
-
-        <a href="@Url.Action("Index", "Tools")" class="btn btn-secondary">Back</a>
-
     </div>
-}
+</div>
